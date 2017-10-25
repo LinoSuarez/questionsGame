@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Question Game</title>
+  </head>
+  <body>
+
+    <h1>Question Game!</h1>
+    <p>Score: <span id="score"></span></p>
+    <span id="question"></span>
+    <script>
+      var score = 0; //YOUR CURRENT SCORE
+      var questionsNumber = 0; //TOTAL NUMBER OF QUESTIONS
+      var questionIndex = 0; //This will be the index that we're at on the questions
+
+      var questions = {
+        0: ["The sky is blue.", "t"],
+        1: ["Earth is perfectly round", "f"],
+        2: ["Roses are red", "t"],
+        3: ["Mexicans are better than Swedish people", "t"],
+        4: ["Cops are cool", "f"]
+      };
+
+      document.getElementById("score").innerHTML = "0"
+      document.getElementById("question").innerHTML = questions[questionIndex][0];
+
+      //Loop through the questions object, and add +1 to questionsNumber for each element there is
+      //Finally setting questionsNumber to the length of questions
+      for (var prop in questions){
+        questionsNumber++;
+      }
+
+      //Every time a key is pressed
+      document.onkeyup = function(event) {
+        var userKey = event.key; //Key user pressed 
+        
+        //Check if answer is correct or not
+        if (userKey === questions[questionIndex][1]){
+          score++;
+          document.getElementById("score").innerHTML = score;
+          alert("Correct!")
+        } else { alert("Incorrect!") }
+
+
+        questionIndex++; //Every time a key is pressed it will increase the Index of questionIndex
+
+        //Continue showing you next question until questionIndex is equal to number of questions
+        //Then it will show your total score
+        if (questionIndex < questionsNumber){
+          document.getElementById("question").innerHTML = questions[questionIndex][0];
+        } else {
+          document.getElementById("score").innerHTML = "Your score is: " + score + "/" + questionsNumber;
+        }
+        
+      }
+    </script>
+    
+  </body>
+</html>
